@@ -1,0 +1,32 @@
+#include <Arduino.h>
+
+//potenciometros
+#define potenciometro1 36
+#define potenciometro2 39
+
+//variables para guardaar valores
+int valorP1, valorP2;
+int mapP1, mapP2;
+
+void setup() {
+  //Serial1.begin(115200);
+  //Serial.begin(115200);
+  Serial2.begin(115200);
+}
+
+void loop() {
+  //lectura de potenciometros
+  valorP1 = analogRead(potenciometro1);
+  valorP2 = analogRead(potenciometro2);
+
+  //mapeo potenciometros
+  mapP1 = map(valorP1, 0, 4095, 0, 15);
+  mapP2 = map(valorP2, 0, 4095, 0, 15);
+
+  //UART1
+  Serial2.write(mapP1);
+  Serial2.write(mapP2);
+
+  //Serial.printf("Valor: %u \n", mapPot2);
+  delay(500);
+}
